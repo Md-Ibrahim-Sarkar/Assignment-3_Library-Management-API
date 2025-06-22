@@ -1,76 +1,74 @@
-Library Management API
+# 📚 Library Management API
 
-A simple RESTful API built with Express, Mongoose, TypeScript, and MongoDB to manage a library's book collection and borrowing system.
+A simple RESTful API built with **Express**, **Mongoose** , **TypeScript**, and **MongoDB** to manage a library's book collection and borrowing system.
 
-Features
+## 🚀 Features
 
 - Create, update, delete
 - Borrow books with quantity and due date
 - Automatically manage book availability
 - Aggregated borrow summary per book
-- MongoDB validation and custom error responses
-- filtering, sorting,
+- filtering, sorting
 
 ---
 
- Tech Stack
+## 📦 Tech Stack
 
 - Node.js + Express
 - TypeScript
 - MongoDB (Mongoose)
-- ESLint + Prettier
-- REST API architecture
 
 ---
 
-Setup Instructions
+## ⚙️ Setup Instructions
 
-1. Clone the Repository
+### 1. Clone the Repository
 
+```bash
+git clone https://github.com/your-username/library-management-api.git
+cd library-management-api
+```
 
-git clone https://github.com/Md-Ibrahim-Sarkar/Assignment-3_Library-Management-API.git
+### 2. Install Dependencies
 
-
- 2. Install Dependencies
-
-
+```bash
 npm install
+```
 
-
-3. Environment Setup
+### 3. Environment Setup
 
 Create a `.env` file (or directly configure) and provide your MongoDB connection string.
 
 Example used:
 
-
+```env
 MONGODB_URI=mongodb+srv://your-username:your-password@cluster0.mongodb.net/database-name?retryWrites=true&w=majority
 PORT=8000
+```
 
+> ⚠️ MongoDB connection string is currently hardcoded in `src/server.ts`. You can improve this by using `dotenv`.
 
- MongoDB connection string is currently hardcoded in `src/server.ts`. You can improve this by using `dotenv`.
+### 4. Run the Server
 
- 4. Run the Server
-
-
+```bash
 npm run dev
-
+```
 
 ---
 
- API Endpoints
+## 🧪 API Endpoints
 
- Book Routes
+### 📘 Book Routes
 
- Method  Endpoint             Description                     
+| Method | Endpoint            | Description                     |
+|--------|---------------------|---------------------------------|
+| GET    | `/api/books`        | Get all books (filter, sort)    |
+| GET    | `/api/books/:id`    | Get a single book               |
+| POST   | `/api/books`        | Create a new book               |
+| PUT    | `/api/books/:bookId`| Update a book                   |
+| DELETE | `/api/books/:bookId`| Delete a book                   |
 
- GET     `/api/books`         Get all books (filter, sort)    
- GET     `/api/books/:id`     Get a single book               
- POST    `/api/books`         Create a new book               
- PUT     `/api/books/:bookId` Update a book                   
- DELETE  `/api/books/:bookId` Delete a book                   
-
-Query Parameters for GET `/api/books`:
+**Query Parameters for GET `/api/books`:**
 
 - `filter`: Filter by genre (e.g. FANTASY)
 - `sortBy`: Sort field (default: `createdAt`)
@@ -79,14 +77,14 @@ Query Parameters for GET `/api/books`:
 
 ---
 
- Borrow Routes
+### 📖 Borrow Routes
 
- Method  Endpoint          Description                           
+| Method | Endpoint         | Description                           |
+|--------|------------------|---------------------------------------|
+| POST   | `/api/borrow`    | Borrow a book                         |
+| GET    | `/api/borrow`    | Get borrow summary (grouped by book)  |
 
- POST    `/api/borrow`     Borrow a book                         
- GET     `/api/borrow`     Get borrow summary (grouped by book)  
-
- Borrow Request Body
+#### 📤 Borrow Request Body
 
 ```json
 {
@@ -98,7 +96,7 @@ Query Parameters for GET `/api/books`:
 
 ---
 
- Project Structure
+## 📂 Project Structure
 
 ```
 src/
@@ -113,7 +111,7 @@ src/
 
 ---
 
- Linting
+## ✅ Linting
 
 ```bash
 npm run lint

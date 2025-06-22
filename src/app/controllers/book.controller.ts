@@ -28,7 +28,7 @@ bookRoutes.get('/', async (req: Request, res: Response) => {
   try {
     const { filter, sortBy , sort, limit ,  } = req.query;
 
-    const query  = {};
+    let query: Record<string, any> = {};
 
     if (filter) {
       query.genre = filter;
