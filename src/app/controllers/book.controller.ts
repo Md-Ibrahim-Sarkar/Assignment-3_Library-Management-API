@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express"
 import { Book } from "../models/book.model";
 import { errorHandle } from "../lib/errorHandle";
-import { Query } from "mongoose";
 
 
 export const bookRoutes = express.Router();
@@ -45,22 +44,30 @@ bookRoutes.get('/', async (req: Request, res: Response) => {
     errorHandle(error, req, res);
   }
 })
-
 bookRoutes.get('/:id', async (req: Request, res: Response) => {
   try {
     const bookId = req.params.id;
-
     const book = await Book.findById(bookId);
+
+    if (!book) {
+       res.status(404).json({
+        success: false,
+        message: 'Book not found',
+        data: null,
+       });
+      return;
+    }
 
     res.status(200).json({
       success: true,
-      message: 'Books retrieved successfully',
+      message: 'Book retrieved successfully',
       data: book,
     });
   } catch (error: any) {
     errorHandle(error, req, res);
   }
-})
+});
+
 
 
 bookRoutes.put('/:bookId', async (req: Request, res: Response): Promise<void>  => {
@@ -71,7 +78,17 @@ bookRoutes.put('/:bookId', async (req: Request, res: Response): Promise<void>  =
     const updatedBook = await Book.findByIdAndUpdate(bookId, updatedData, {
       new: true,
       runValidators: true,
-    });
+    });    
+
+    if (!updatedBook) { 
+      res.status(404).json({
+        success: false,
+        message: 'Book not found. Unable to update the record.',
+        data: null,
+      });
+      return;
+    }
+    
 
     res.status(200).json({
       success: true,

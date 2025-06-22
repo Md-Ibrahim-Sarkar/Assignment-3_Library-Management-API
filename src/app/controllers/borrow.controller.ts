@@ -4,10 +4,6 @@ import { errorHandle } from "../lib/errorHandle";
 import { Book } from "../models/book.model";
 import { Borrow } from "../models/borrow.model";
 
-
-
-
-
 export const borrowRoute = express.Router()
 
 borrowRoute.post('/', async (req: Request, res: Response): Promise<void> => {
